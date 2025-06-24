@@ -202,7 +202,7 @@ public class SavingAccountTest {
     }
 
     @Test
-    //Если начальный баланс отрицательный, должна возникать исключительная ситуация
+    //Если минимальный баланс отрицательный, должна возникать исключительная ситуация
     public void shouldTrowsExceptionWhenNegativeMinBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -403,7 +403,7 @@ public class SavingAccountTest {
     }
 
     @Test
-    //
+    //Проверяем, что округление выполняется праильно
     public void yearChange() {
         SavingAccount account = new SavingAccount(
                 2_555,
