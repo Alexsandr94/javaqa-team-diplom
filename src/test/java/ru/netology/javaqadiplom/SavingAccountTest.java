@@ -7,7 +7,7 @@ public class SavingAccountTest {
 
     @Test
     //При отрицательной ставке должна возникать исключительная ситуация
-    public void shouldTrowsExceptionWhenNegativeRate() {
+    public void shouldThrowsExceptionWhenNegativeRate() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
@@ -22,7 +22,7 @@ public class SavingAccountTest {
     @Test
     //При нулевой ставке не должна возникать исключительная ситуация, т.к. по условиям ставка
     // - неотрицательное число
-    public void shouldNotTrowsExceptionWhenZeroRate() {
+    public void shouldNotThrowsExceptionWhenZeroRate() {
 
         SavingAccount account = new SavingAccount(
                 2_000,
@@ -40,7 +40,7 @@ public class SavingAccountTest {
     @Test
     //При положительной ставке не должна возникать исключительная ситуация, т.к. по условиям ставка
     // - неотрицательное число
-    public void shouldNotTrowsExceptionWhenPositiveRate() {
+    public void shouldNotThrowsExceptionWhenPositiveRate() {
 
         SavingAccount account = new SavingAccount(
                 2_000,
@@ -57,7 +57,7 @@ public class SavingAccountTest {
 
     @Test
     //Если минимальный баланс больше максимального, должна возникать исключительная ситуация
-    public void shouldTrowsExceptionWhenMinBalanceMoreThanMaxBalance() {
+    public void shouldThrowsExceptionWhenMinBalanceMoreThanMaxBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
@@ -71,7 +71,7 @@ public class SavingAccountTest {
 
     @Test
     //Если минимальный баланс меньше максимального, не должна возникать исключительная ситуация
-    public void shouldNotTrowsExceptionWhenMinBalanceLessThanMaxBalance() {
+    public void shouldNotThrowsExceptionWhenMinBalanceLessThanMaxBalance() {
 
         SavingAccount account = new SavingAccount(
                 2_000,
@@ -90,7 +90,7 @@ public class SavingAccountTest {
     //Если минимальный баланс равен максимальному, не должна возникать исключительная ситуация
     //т.к. по условиям - баланс должен быть в пределах минимального и максимального включительно,
     // т.е., по идее, он может быть равен минимальному и максимальному балансу одновременно
-    public void shouldNotTrowsExceptionWhenMinBalanceAndMaxBalanceEqual() {
+    public void shouldNotThrowsExceptionWhenMinBalanceAndMaxBalanceEqual() {
 
         SavingAccount account = new SavingAccount(
                 1_000,
@@ -107,7 +107,7 @@ public class SavingAccountTest {
 
     @Test
     //Если начальный баланс больше максимального, должна возникать исключительная ситуация
-    public void shouldTrowsExceptionWhenInitialBalanceMoreThanMaxBalance() {
+    public void shouldThrowsExceptionWhenInitialBalanceMoreThanMaxBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
@@ -121,7 +121,7 @@ public class SavingAccountTest {
 
     @Test
     //Если начальный баланс меньше максимального, не должна возникать исключительная ситуация
-    public void shouldNotTrowsExceptionWhenInitialBalanceLessThanMaxBalance() {
+    public void shouldNotThrowsExceptionWhenInitialBalanceLessThanMaxBalance() {
 
         SavingAccount account = new SavingAccount(
                 2_000,
@@ -138,7 +138,7 @@ public class SavingAccountTest {
 
     @Test
     //Если начальный баланс равен максимальному, не должна возникать исключительная ситуация
-    public void shouldNotTrowsExceptionWhenInitialBalanceAndMaxBalanceEqual() {
+    public void shouldNotThrowsExceptionWhenInitialBalanceAndMaxBalanceEqual() {
 
         SavingAccount account = new SavingAccount(
                 10_000,
@@ -155,7 +155,7 @@ public class SavingAccountTest {
 
     @Test
     //Если начальный баланс меньше минимального, должна возникать исключительная ситуация
-    public void shouldTrowsExceptionWhenInitialBalanceLessThanMinBalance() {
+    public void shouldThrowsExceptionWhenInitialBalanceLessThanMinBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
@@ -169,7 +169,7 @@ public class SavingAccountTest {
 
     @Test
     //Если начальный баланс больше минимального, не должна возникать исключительная ситуация
-    public void shouldNotTrowsExceptionWhenInitialBalanceMoreThanMinBalance() {
+    public void shouldNotThrowsExceptionWhenInitialBalanceMoreThanMinBalance() {
 
         SavingAccount account = new SavingAccount(
                 2_000,
@@ -186,7 +186,7 @@ public class SavingAccountTest {
 
     @Test
     //Если начальный баланс равен минимальному, не должна возникать исключительная ситуация
-    public void shouldNotTrowsExceptionWhenInitialBalanceAndMinBalanceEqual() {
+    public void shouldNotThrowsExceptionWhenInitialBalanceAndMinBalanceEqual() {
 
         SavingAccount account = new SavingAccount(
                 1_000,
@@ -203,7 +203,7 @@ public class SavingAccountTest {
 
     @Test
     //Если минимальный баланс отрицательный, должна возникать исключительная ситуация
-    public void shouldTrowsExceptionWhenNegativeMinBalance() {
+    public void shouldThrowsExceptionWhenNegativeMinBalance() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
@@ -217,7 +217,7 @@ public class SavingAccountTest {
 
     @Test
     //Если начальный баланс положительный, не должна возникать исключительная ситуация
-    public void shouldNotTrowsExceptionWhenPositiveMinBalance() {
+    public void shouldNotThrowsExceptionWhenPositiveMinBalance() {
 
         SavingAccount account = new SavingAccount(
                 2_000,
@@ -234,7 +234,7 @@ public class SavingAccountTest {
 
     @Test
     //Если минимальный баланс равен нулю, не должна возникать исключительная ситуация
-    public void shouldNotTrowsExceptionWhenZeroMinBalance() {
+    public void shouldNotThrowsExceptionWhenZeroMinBalance() {
 
         SavingAccount account = new SavingAccount(
                 1_000,
