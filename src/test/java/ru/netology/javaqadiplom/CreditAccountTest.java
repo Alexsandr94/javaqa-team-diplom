@@ -276,4 +276,5 @@ public class CreditAccountTest {
         Assertions.assertTrue(payResult);
         Assertions.assertEquals(0, account.getBalance());
     }
+    
 }
