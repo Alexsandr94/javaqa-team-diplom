@@ -22,12 +22,6 @@ public class CreditAccountTest {
 
     @Test
     public void shouldThrowExceptionForNegativeRate() {
-        CreditAccount account = new CreditAccount(
-                1_000,
-                5_000,
-                -10
-        );
-
         IllegalArgumentException exception = Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> new CreditAccount(1_000, 5_000, -10)
@@ -35,6 +29,19 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(
                 "Накопительная ставка не может быть отрицательной, а у вас: -10",
+                exception.getMessage()
+        );
+    }
+
+    @Test
+    public void shouldThrowExceptionForNegativeRateZero() {
+        IllegalArgumentException exception = Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new CreditAccount(1_000, 5_000, 0)
+        );
+
+        Assertions.assertEquals(
+                "Накопительная ставка не может быть отрицательной, а у вас: 0",
                 exception.getMessage()
         );
     }
@@ -276,4 +283,5 @@ public class CreditAccountTest {
         Assertions.assertTrue(payResult);
         Assertions.assertEquals(0, account.getBalance());
     }
+
 }
