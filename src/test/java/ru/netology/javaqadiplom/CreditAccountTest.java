@@ -219,14 +219,20 @@ public class CreditAccountTest {
     @Test
     public void shouldCalculateInterestForNegativeBalance() {
         CreditAccount account = new CreditAccount(
-                -200,
+                200,
                 5_000,
                 15
         );
+        int initialResult = account.yearChange();
+        Assertions.assertEquals(0, initialResult);
 
-        int result = account.yearChange();
+        boolean paymentResult = account.pay(400);
+        Assertions.assertTrue(paymentResult);
+        Assertions.assertEquals(-200, account.getBalance());
 
-        Assertions.assertEquals(-30, result);
+        int negativeResult = account.yearChange();
+        Assertions.assertEquals(-30, negativeResult);
+        Assertions.assertTrue(negativeResult < 0);
     }
 
     @Test
