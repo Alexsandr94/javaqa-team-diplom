@@ -21,18 +21,31 @@ public class CreditAccountTest {
     // ========== Конструктор ==========
 
     @Test
-    public void shouldThrowExceptionForNegativeRate() {
+    public void shouldNotThrowExceptionForZeroRate() {
         IllegalArgumentException exception = Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> new CreditAccount(1_000, 5_000, -10)
+                () -> new CreditAccount(1_000, 5_000, 0)
         );
 
         Assertions.assertEquals(
-                "Накопительная ставка не может быть отрицательной, а у вас: -10",
+                "Кредитная ставка не может быть отрицательной, а у вас: -10",
                 exception.getMessage()
         );
     }
 
+    @Test
+    public void shouldNotThrowExceptionForZeroRate2() {
+        CreditAccount account = new CreditAccount(
+                1_000,
+                5_000,
+                0
+        );
+
+        Assertions.assertEquals(1_000, account.getBalance());
+        Assertions.assertEquals(5_000, account.getCreditLimit());
+        Assertions.assertEquals(0, account.getRate());
+    }
+    
     @Test
     public void shouldThrowExceptionForNegativeRateZero() {
         IllegalArgumentException exception = Assertions.assertThrows(
