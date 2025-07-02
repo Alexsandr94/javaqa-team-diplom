@@ -45,7 +45,7 @@ public class CreditAccountTest {
         Assertions.assertEquals(5_000, account.getCreditLimit());
         Assertions.assertEquals(0, account.getRate());
     }
-    
+
     @Test
     public void shouldThrowExceptionForNegativeRateZero() {
         IllegalArgumentException exception = Assertions.assertThrows(
