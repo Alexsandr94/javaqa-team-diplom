@@ -21,19 +21,6 @@ public class CreditAccountTest {
     // ========== Конструктор ==========
 
     @Test
-    public void shouldNotThrowExceptionForZeroRate() {
-        IllegalArgumentException exception = Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> new CreditAccount(1_000, 5_000, 0)
-        );
-
-        Assertions.assertEquals(
-                "Кредитная ставка не может быть отрицательной, а у вас: -10",
-                exception.getMessage()
-        );
-    }
-
-    @Test
     public void shouldNotThrowExceptionForZeroRate2() {
         CreditAccount account = new CreditAccount(
                 1_000,
@@ -50,11 +37,11 @@ public class CreditAccountTest {
     public void shouldThrowExceptionForNegativeRateZero() {
         IllegalArgumentException exception = Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> new CreditAccount(1_000, 5_000, 0)
+                () -> new CreditAccount(1_000, 5_000, -10)
         );
 
         Assertions.assertEquals(
-                "Накопительная ставка не может быть отрицательной, а у вас: 0",
+                "Кредитная ставка не может быть отрицательной, а у вас: -10",
                 exception.getMessage()
         );
     }
@@ -276,14 +263,19 @@ public class CreditAccountTest {
 
     @Test
     public void shouldCalculateInterestForSmallNegativeBalance() {
+        // Создаем счет с положительным начальным балансом
         CreditAccount account = new CreditAccount(
-                -105,
+                500,
                 5_000,
                 17
         );
 
+        account.pay(605);
+        Assertions.assertEquals(-105, account.getBalance());
+
         int result = account.yearChange();
 
+        // Проверяем расчет процентов
         Assertions.assertEquals(-17, result);
     }
 
@@ -312,20 +304,20 @@ public class CreditAccountTest {
         account1.pay(200); // Баланс станет -199
         Assertions.assertEquals(-199, account1.getBalance());
 
-        // Правильный расчет: -199 * 0.15 = -29.85, округление до -30
+        // Правильный расчет: -199 * 0.15 = -29.85, округление до -29
         // При текущей реализации: -199 / 100 = -1, затем -1 * 15 = -15
         int result1 = account1.yearChange();
-        Assertions.assertEquals(-30, result1);
+        Assertions.assertEquals(-29, result1);
 
         // Тест 2: -150 с 21% должен давать -32 (а не -21)
         CreditAccount account2 = new CreditAccount(50, 5_000, 21);
         account2.pay(200); // Баланс станет -150
         Assertions.assertEquals(-150, account2.getBalance());
 
-        // Правильный расчет: -150 * 0.21 = -31.5, округление до -32
+        // Правильный расчет: -150 * 0.21 = -31.5, округление до -31
         // При текущей реализации: -150 / 100 = -1, затем -1 * 21 = -21
         int result2 = account2.yearChange();
-        Assertions.assertEquals(-32, result2);
+        Assertions.assertEquals(-31, result2);
 
         // Тест 3: Поведение для баланса ровно -100 (граничный случай)
         CreditAccount account3 = new CreditAccount(100, 5_000, 10);
@@ -341,10 +333,10 @@ public class CreditAccountTest {
         account4.pay(200); // Баланс станет -101
         Assertions.assertEquals(-101, account4.getBalance());
 
-        // Правильный расчет: -101 * 0.10 = -10.1, округление до -11
+        // Правильный расчет: -101 * 0.10 = -10.1, округление до -10
         // При текущей реализации: -101 / 100 = -1, затем -1 * 10 = -10
         int result4 = account4.yearChange();
-        Assertions.assertEquals(-11, result4);
+        Assertions.assertEquals(-10, result4);
     }
 
 }
